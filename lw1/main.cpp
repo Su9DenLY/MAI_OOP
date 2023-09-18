@@ -10,9 +10,9 @@ int main() {
     result = count_ones(first, second);
 
     if (result >= 0) {
-        cout << result << "\n";
+        cout << result << endl;
     } else {
-        cout << "Incorrect input\n";
+        cout << "Incorrect input" << endl;
         return 1;
     }
 
