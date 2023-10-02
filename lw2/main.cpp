@@ -1,39 +1,35 @@
 #include "seven.hpp"
 
+using namespace std;
+
 int main() {
-    // std::string number, number1;
-    // std::cin >> number >> number1;
-    // Seven a(number);
-    // Seven b(number1);
-    // Seven c(number);
-    // Seven d(number1);
-    // Seven ans("0");
-    // std::cout << a << " == " << b << "  " << (a == b) << std::endl;
-    // std::cout << a << " != " << b << "  " << (a != b) << std::endl;
-    // std::cout << a << " > " << b << "  " << (a > b) << std::endl;
-    // std::cout << a << " < " << b << "  " << (a < b) << std::endl;
-    // std::cout << a << " <= " << b << "  " << (a <= b) << std::endl;
-    // std::cout << a << " >= " << b << "  " << (a >= b) << std::endl;
-
-    // ans = a + b;
-    // std::cout << ans << std::endl;
-
-    // a += b;
-    // a.print();
-
-    // ans = c - d;
-    // ans.print();
-
-    // c -= d;
-    // c.print();
-    // std::string a;
-    // std::cin >> a;
-    // std::cout << a << "   " << check_seven(a);
     try {
-        Seven a;
-        Seven b("12");
-        std::cout << (a != b);
-    } catch (const std::exception &ex) {
-        std::cerr << "Error: " << ex.what() << std::endl;
+        string number1, number2;
+
+        cout << "a = ";
+        cin >> number1;
+        cout << "b = ";
+        cin >> number2;
+        cout << endl;
+
+        Seven a(number1);
+        Seven b(number2);
+
+        cout << a << "\t==\t" << b << "  " << "\t|\t" << ((a == b) ? "true" : "false") << endl;
+        cout << a << "\t!=\t" << b << "  " << "\t|\t" << ((a != b) ? "true" : "false") << endl;
+        cout << a << "\t>\t" << b << "  " << "\t|\t" << ((a > b) ? "true" : "false") << endl;
+        cout << a << "\t<\t" << b << "  " << "\t|\t" << ((a < b) ? "true" : "false") << endl;
+        cout << a << "\t<=\t" << b << "  " << "\t|\t" << ((a <= b) ? "true" : "false") << endl;
+        cout << a << "\t>=\t" << b << "  " << "\t|\t" << ((a >= b) ? "true" : "false") << endl << endl;
+
+        cout << "a + b = " << a + b << endl;
+        cout << "a - b = " << a - b << endl;
+
+    } catch (const domain_error &ex) {
+        cerr << "Domain_error: " << ex.what() << endl;
+    } catch (const invalid_argument &ex) {
+        cerr << "Invalid_argument: " << ex.what() << endl;
+    } catch (const logic_error &ex) {
+        cerr << "Logic_error: " << ex.what() << endl;
     }
 }
