@@ -19,6 +19,7 @@ public:
     Seven(const Seven &other);
     Seven(Seven &&other) noexcept;
     Seven &operator=(const Seven &other);
+    Seven &operator=(Seven &&other);
 
     std::string get_number() const;
     int get_size() const;

@@ -46,8 +46,16 @@ Seven::Seven(const std::initializer_list<unsigned char> &list)
 }
 
 Seven::Seven(const int capacity) {
+    if (capacity < 0) {
+        throw std::invalid_argument("Capacity cannot be less than 0");
+    }
     this->capacity = capacity;
+    this->size = 0;
     number = new unsigned char[capacity];
+
+    for (int i = 0; i < capacity; ++i) {
+        number[i] = '0';
+    }
 }
 
 void Seven::reallocate(const int capacity) {
@@ -74,6 +82,16 @@ Seven::Seven(const Seven &other) {
     }
 }
 
+Seven::Seven(Seven &&other) noexcept {
+    this->size = other.size;
+    this->capacity = other.capacity;
+    this->number = other.number;
+
+    other.size = 0;
+    other.capacity = 0;
+    other.number = nullptr;
+}
+
 Seven &Seven::operator=(const Seven &other) {
     if (other.number == nullptr) {
         throw std::domain_error("The object is not initialized");
@@ -92,7 +110,7 @@ Seven &Seven::operator=(const Seven &other) {
     return *this;
 }
 
-Seven::Seven(Seven &&other) noexcept {
+Seven &Seven::operator=(Seven &&other) {
     this->size = other.size;
     this->capacity = other.capacity;
     delete[] this->number;
@@ -101,9 +119,15 @@ Seven::Seven(Seven &&other) noexcept {
     other.size = 0;
     other.capacity = 0;
     other.number = nullptr;
+
+    return *this;
 }
 
 std::string Seven::get_number() const {
+    if (number == nullptr) {
+        throw std::domain_error("The object is not initialized");
+    }
+
     std::string temp = "";
     for (int i = size - 1; i >= 0; i--) {
         temp += number[i];
@@ -115,8 +139,11 @@ int Seven::get_size() const {
     return size;
 }
 
-std::ostream &operator<<(std::ostream &os, const Seven &obj) {
-    os << obj.get_number();
+std::ostream &operator<<(std::ostream &os, const Seven &object) {
+    if (object.number == nullptr) {
+        throw std::domain_error("The object is not initialized");
+    }
+    os << object.get_number();
     return os;
 }
 
@@ -204,23 +231,25 @@ Seven &Seven::operator+=(const Seven &other) {
 
     int carry = 0;
     for (int i = 0; i < max_size; ++i) {
-        int summa = 0;
+        int sum = 0;
         if (i < min_size) {
-            summa = this->number[i] - '0' + other.number[i] - '0';
+            sum = this->number[i] - '0' + other.number[i] - '0';
         } else if (this->size > other.size) {
-            summa = this->number[i] - '0';
+            sum = this->number[i] - '0';
         } else {
-            summa = other.number[i] - '0';
+            sum = other.number[i] - '0';
         }
-        summa += carry;
-        carry = summa / 7;
-        summa %= 7;
-        this->number[i] = summa + '0';
+        sum += carry;
+        carry = sum / 7;
+        sum %= 7;
+        this->number[i] = sum + '0';
     }
 
     if (carry > 0) {
         this->number[max_size] = carry + '0';
         this->size++;
+    } else {
+        this->size = max_size;
     }
 
     return *this;
@@ -231,7 +260,7 @@ Seven &Seven::operator-=(const Seven &other) {
         throw std::domain_error("The object is not initialized");
     }
     if (*this < other) {
-        throw std::logic_error("");
+        throw std::logic_error("Minuend is less than subtrahend");
     }
     int carry = 0;
     for (int i = 0; i < this->size; ++i) {
