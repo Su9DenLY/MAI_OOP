@@ -1,8 +1,8 @@
 #ifndef SEVEN_HPP
 #define SEVEN_HPP
 
-#include <iostream>
 #include <exception>
+#include <iostream>
 
 void remove_fisrt_zeros(std::string &str);
 bool check_seven(const std::string &number);

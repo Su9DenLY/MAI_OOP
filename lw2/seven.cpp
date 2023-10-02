@@ -111,7 +111,7 @@ std::string Seven::get_number() const {
     return temp;
 }
 
-int Seven::get_size() const{
+int Seven::get_size() const {
     return size;
 }
 

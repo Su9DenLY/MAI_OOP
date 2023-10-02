@@ -33,8 +33,7 @@ int main() {
         Seven a;
         Seven b("12");
         std::cout << (a != b);
-    }
-    catch (const std::exception &ex) {
+    } catch (const std::exception &ex) {
         std::cerr << "Error: " << ex.what() << std::endl;
     }
 }
