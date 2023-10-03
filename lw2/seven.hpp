@@ -26,14 +26,14 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Seven &obj);
 
-    bool operator==(const Seven &other);
-    bool operator!=(const Seven &other);
-    bool operator>(const Seven &other);
-    bool operator<(const Seven &other);
-    bool operator<=(const Seven &other);
-    bool operator>=(const Seven &other);
-    Seven operator+(const Seven &other);
-    Seven operator-(const Seven &other);
+    bool operator==(const Seven &other) const;
+    bool operator!=(const Seven &other) const;
+    bool operator>(const Seven &other) const;
+    bool operator<(const Seven &other) const;
+    bool operator<=(const Seven &other) const;
+    bool operator>=(const Seven &other) const;
+    Seven operator+(const Seven &other) const;
+    Seven operator-(const Seven &other) const;
     Seven &operator+=(const Seven &other);
     Seven &operator-=(const Seven &other);
 

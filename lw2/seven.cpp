@@ -147,7 +147,7 @@ std::ostream &operator<<(std::ostream &os, const Seven &object) {
     return os;
 }
 
-bool Seven::operator==(const Seven &other) {
+bool Seven::operator==(const Seven &other) const {
     if (this->number == nullptr || other.number == nullptr) {
         throw std::domain_error("The object is not initialized");
     }
@@ -160,11 +160,11 @@ bool Seven::operator==(const Seven &other) {
     return false;
 }
 
-bool Seven::operator!=(const Seven &other) {
+bool Seven::operator!=(const Seven &other) const {
     return !(*this == other);
 }
 
-bool Seven::operator>(const Seven &other) {
+bool Seven::operator>(const Seven &other) const {
     if (this->number == nullptr || other.number == nullptr) {
         throw std::domain_error("The object is not initialized");
     }
@@ -181,7 +181,7 @@ bool Seven::operator>(const Seven &other) {
     return false;
 }
 
-bool Seven::operator<(const Seven &other) {
+bool Seven::operator<(const Seven &other) const {
     if (this->number == nullptr || other.number == nullptr) {
         throw std::domain_error("The object is not initialized");
     }
@@ -198,22 +198,22 @@ bool Seven::operator<(const Seven &other) {
     return false;
 }
 
-bool Seven::operator<=(const Seven &other) {
+bool Seven::operator<=(const Seven &other) const {
     return !(*this > other);
 }
 
-bool Seven::operator>=(const Seven &other) {
+bool Seven::operator>=(const Seven &other) const {
     return !(*this < other);
 }
 
-Seven Seven::operator+(const Seven &other) {
+Seven Seven::operator+(const Seven &other) const {
     Seven temp = (*this);
     temp += other;
 
     return temp;
 }
 
-Seven Seven::operator-(const Seven &other) {
+Seven Seven::operator-(const Seven &other) const {
     Seven temp = (*this);
     temp -= other;
 
