@@ -14,7 +14,6 @@ public:
     Seven(const std::initializer_list<unsigned char> &list);
     Seven(const int capacity);
 
-    void reallocate(const int capacity);
 
     Seven(const Seven &other);
     Seven(Seven &&other) noexcept;
@@ -37,12 +36,14 @@ public:
     Seven &operator+=(const Seven &other);
     Seven &operator-=(const Seven &other);
 
-    ~Seven() noexcept;
+    virtual ~Seven() noexcept;
 
 private:
     unsigned char *number;
     int size;
     int capacity;
+    
+    void reallocate(const int capacity);
 };
 
 #endif
