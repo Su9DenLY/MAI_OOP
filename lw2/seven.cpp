@@ -27,7 +27,7 @@ Seven::Seven() {
 
 Seven::Seven(const std::string &number) {
     if (!check_seven(number)) {
-        throw std::invalid_argument("Is not 7 nymber system");
+        throw std::invalid_argument("Is not 7 number system");
     }
     std::string modified_number = number;
     remove_fisrt_zeros(modified_number);
