@@ -93,9 +93,14 @@ Seven::Seven(Seven &&other) noexcept {
 }
 
 Seven &Seven::operator=(const Seven &other) {
+    if (this == &other) {
+        return *this;
+    }
+
     if (other.number == nullptr) {
         throw std::domain_error("The object is not initialized");
     }
+
     this->size = other.size;
     this->capacity = other.capacity;
 
@@ -111,6 +116,10 @@ Seven &Seven::operator=(const Seven &other) {
 }
 
 Seven &Seven::operator=(Seven &&other) {
+    if (this == &other) {
+        return *this;
+    }
+
     this->size = other.size;
     this->capacity = other.capacity;
     delete[] this->number;
@@ -207,17 +216,11 @@ bool Seven::operator>=(const Seven &other) const {
 }
 
 Seven Seven::operator+(const Seven &other) const {
-    Seven temp = (*this);
-    temp += other;
-
-    return temp;
+    return Seven(*this) += other;
 }
 
 Seven Seven::operator-(const Seven &other) const {
-    Seven temp = (*this);
-    temp -= other;
-
-    return temp;
+    return Seven(*this) -= other;
 }
 
 Seven &Seven::operator+=(const Seven &other) {
