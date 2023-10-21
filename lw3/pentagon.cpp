@@ -26,7 +26,7 @@ Pentagon::Pentagon(const Point &p0, const Point &p1, const Point &p2, const Poin
     coordinates[4] = p4;
 
     if (!(this->check())) {
-        throw std::invalid_argument("This figure is not a rhomb");
+        throw std::invalid_argument("This figure is not convex");
     }
 }
 
@@ -42,7 +42,7 @@ void Pentagon::input(std::istream &is) noexcept {
     }
 
     if (!(this->check())) {
-        throw std::invalid_argument("This figure is not a rhomb");
+        throw std::invalid_argument("This figure is not convex");
     }
 }
 

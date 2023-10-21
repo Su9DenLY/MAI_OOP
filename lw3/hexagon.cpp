@@ -27,7 +27,7 @@ Hexagon::Hexagon(const Point &p0, const Point &p1, const Point &p2, const Point 
     coordinates[5] = p5;
 
     if (!(this->check())) {
-        throw std::invalid_argument("This figure is not a rhomb");
+        throw std::invalid_argument("This figure is not convex");
     }
 }
 
@@ -43,7 +43,7 @@ void Hexagon::input(std::istream &is) noexcept {
     }
 
     if (!(this->check())) {
-        throw std::invalid_argument("This figure is not a rhomb");
+        throw std::invalid_argument("This figure is not convex");
     }
 }
 
@@ -116,5 +116,5 @@ Point Hexagon::center() const noexcept {
         y_center += coordinates[i].get_y();
     }
 
-    return Point(x_center * 0.2, y_center * 0.2);
+    return Point(x_center / 6, y_center / 6);
 }
