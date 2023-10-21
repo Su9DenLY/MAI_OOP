@@ -5,7 +5,7 @@
 
 class Hexagon final : public Figure {
 private:
-    Point coordinates[5];
+    Point coordinates[6];
 
 public:
     bool check() const;
