@@ -48,7 +48,7 @@ double Point::get_y() const noexcept {
 }
 
 std::ostream &operator<<(std::ostream &os, const Point &obj) {
-    os << "(" << obj.x << ", " << obj.y << ")" << std::endl;
+    os << "(" << obj.x << ", " << obj.y << ")";
     return os;
 }
 
