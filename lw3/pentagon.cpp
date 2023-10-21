@@ -36,7 +36,7 @@ void Pentagon::output(std::ostream &os) const noexcept {
     }
 }
 
-void Pentagon::input(std::istream &is) noexcept {
+void Pentagon::input(std::istream &is) {
     for (int i = 0; i < POINT_COUNT; ++i) {
         is >> coordinates[i];
     }

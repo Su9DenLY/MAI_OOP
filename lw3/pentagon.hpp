@@ -15,7 +15,7 @@ public:
     ~Pentagon() = default;
 
     void output(std::ostream &os) const noexcept override;
-    void input(std::istream &is) noexcept override;
+    void input(std::istream &is) override;
 
     Pentagon(const Pentagon &other);
     Pentagon(Pentagon &&other) noexcept;

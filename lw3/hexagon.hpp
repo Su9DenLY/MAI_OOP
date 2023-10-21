@@ -15,7 +15,7 @@ public:
     ~Hexagon() = default;
 
     void output(std::ostream &os) const noexcept override;
-    void input(std::istream &is) noexcept override;
+    void input(std::istream &is) override;
 
     Hexagon(const Hexagon &other);
     Hexagon(Hexagon &&other) noexcept;

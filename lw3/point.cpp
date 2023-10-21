@@ -39,6 +39,14 @@ Point &Point::operator=(Point &&other) {
     return *this;
 }
 
+double Point::get_x() const noexcept {
+    return x;
+}
+
+double Point::get_y() const noexcept {
+    return y;
+}
+
 std::ostream &operator<<(std::ostream &os, const Point &obj) {
     os << "(" << obj.x << ", " << obj.y << ")" << std::endl;
     return os;
@@ -46,6 +54,7 @@ std::ostream &operator<<(std::ostream &os, const Point &obj) {
 
 std::istream &operator>>(std::istream &is, Point &obj) {
     is >> obj.x >> obj.y;
+    return is;
 }
 
 bool Point::operator==(const Point &other) const noexcept {

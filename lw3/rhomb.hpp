@@ -15,7 +15,7 @@ public:
     ~Rhomb() = default;
 
     void output(std::ostream &os) const noexcept override;
-    void input(std::istream &is) noexcept override;
+    void input(std::istream &is) override;
 
     Rhomb(const Rhomb &other);
     Rhomb(Rhomb &&other) noexcept;

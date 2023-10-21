@@ -27,7 +27,7 @@ void Rhomb::output(std::ostream &os) const noexcept {
     }
 }
 
-void Rhomb::input(std::istream &is) noexcept {
+void Rhomb::input(std::istream &is) {
     for (int i = 0; i < POINT_COUNT; ++i) {
         is >> coordinates[i];
     }

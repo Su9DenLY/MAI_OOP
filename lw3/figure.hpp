@@ -8,7 +8,7 @@ public:
     Figure() = default;
 
     virtual void output(std::ostream& os) const noexcept = 0;
-    virtual void input(std::istream& is) noexcept = 0;
+    virtual void input(std::istream& is) = 0;
 
     virtual ~Figure() noexcept = default;
     virtual double square() const noexcept = 0;

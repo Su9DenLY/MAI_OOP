@@ -37,7 +37,7 @@ void Hexagon::output(std::ostream &os) const noexcept {
     }
 }
 
-void Hexagon::input(std::istream &is) noexcept {
+void Hexagon::input(std::istream &is) {
     for (int i = 0; i < POINT_COUNT; ++i) {
         is >> coordinates[i];
     }
