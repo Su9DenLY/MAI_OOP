@@ -1,15 +1,17 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
+#include <concepts>
 #include <memory>
 
-template <class T>
+template <typename T>
+    requires std::is_default_constructible_v<T>
+
 class Array final {
 private:
     size_t len;
     size_t capacity;
-    T **array;
-    // std::shared_ptr<T[]> array;
+    std::shared_ptr<T[]> array;
 
     void reallocate(size_t capacity) {
         this->capacity = capacity;
@@ -30,21 +32,16 @@ public:
     Array(size_t len) {
         this->len = len;
         capacity = len;
-        array = new T *[capacity];
+        this->array = std::shared_ptr<T[]>(new T[capacity]);
     }
 
     Array(size_t len, size_t capacity) {
         this->len = len;
         this->capacity = capacity;
-        array = new T *[capacity];
+        this->array = std::shared_ptr<T[]>(new T[capacity]);
     }
 
-    ~Array() {
-        if (array != nullptr) {
-            len = capacity = 0;
-            delete[] array;
-        }
-    }
+    ~Array() = default;
 
     Array(const Array<T> &other) {
         if (other.array == nullptr) {
@@ -53,7 +50,7 @@ public:
         this->len = other.len;
         this->capacity = other.capacity;
 
-        this->array = new T *[capacity];
+        this->array = std::shared_ptr<T[]>(new T[capacity]);
 
         for (int i = 0; i < len; ++i) {
             this->array[i] = other.array[i];
@@ -70,7 +67,7 @@ public:
         other.array = nullptr;
     }
 
-    Array &operator=(const Array<T> &other) {
+    Array<T> &operator=(const Array<T> &other) {
         if (this == &other) {
             return *this;
         }
@@ -82,9 +79,7 @@ public:
         this->len = other.len;
         this->capacity = other.capacity;
 
-        delete[] this->array;
-
-        this->array = new T *[capacity];
+        this->array = std::shared_ptr<T[]>(new T[capacity]);
 
         for (int i = 0; i < len; ++i) {
             this->array[i] = other.array[i];
@@ -93,14 +88,13 @@ public:
         return *this;
     }
 
-    Array &operator=(Array<T> &&other) {
+    Array<T> &operator=(Array<T> &&other) {
         if (this == &other) {
             return *this;
         }
 
         this->len = other.len;
         this->capacity = other.capacity;
-        delete[] this->array;
         this->array = other.array;
 
         other.len = 0;
@@ -110,7 +104,7 @@ public:
         return *this;
     }
 
-    void push_back(T *elem) {
+    void push_back(T elem) {
         if (capacity < len + 1 || this->array == nullptr) {
             this->reallocate(2 * capacity);
         }
@@ -121,6 +115,8 @@ public:
     void pop_back() {
         if (len > 0) {
             len--;
+        } else {
+            throw std::logic_error("Array already is empty");
         }
     }
 
@@ -151,7 +147,7 @@ public:
         array[index] = elem;
     }
 
-    T *operator[](int index) {
+    T operator[](int index) {
         if (index >= len || index < 0) {
             throw std::out_of_range("Out of range");
         }
