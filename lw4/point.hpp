@@ -13,9 +13,9 @@ private:
 
 public:
     Point() = default;
-    Point(T x, T y) {
-        this->x = x;
-        this->y = y;
+    Point(T x, const T &y) {
+        this->x = std::move(x);
+        this->y = std::move(y);
     }
 
     T get_x() const noexcept {
